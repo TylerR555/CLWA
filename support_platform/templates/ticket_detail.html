@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket #{{ ticket.ticket_id }}{% endblock %}
+
+{% block content %}
+  <h2>Ticket #{{ ticket.ticket_id }}</h2>
+  <p><strong>Status:</strong> {{ ticket.status }}</p>
+  <p><strong>Issue Type:</strong> {{ ticket.issue_type }}</p>
+  <p><strong>Reported by:</strong> User ID {{ ticket.user_id }}</p> {# In a real app, show username #}
+  <p><strong>Created:</strong> {{ ticket.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+  <p><strong>Last Updated:</strong> {{ ticket.updated_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+  
+  <hr>
+  <h3>Message:</h3>
+  <pre>{{ ticket.message }}</pre> {# Use <pre> to preserve formatting #}
+
+  {% if ticket.screenshots %}
+    <hr>
+    <h3>Screenshots:</h3>
+    <div>
+      {% for filename in ticket.screenshots %}
+        <a href="{{ url_for('static', filename='uploads/' + filename) }}" target="_blank">
+          <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="{{ filename }}" style="max-width: 200px; max-height: 200px; margin: 5px;">
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <hr>
+  <h3>Replies:</h3>
+  {% if ticket.replies %}
+    {% for reply in ticket.replies %}
+      <div class="reply" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px;">
+        <p><strong>Reply from:</strong> User ID {{ reply.user_id }} {# Show username later #}
+           {% if reply.is_support_reply %}(Support){% endif %}
+           at {{ reply.timestamp.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+        <pre>{{ reply.text }}</pre>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No replies yet.</p>
+  {% endif %}
+
+  <hr>
+  <h4>Add Your Reply:</h4>
+  <form method="post" action="{{ url_for('ticket_detail', ticket_id=ticket.ticket_id) }}">
+    <div>
+      <label for="reply_text">Your Message:</label>
+      <textarea id="reply_text" name="reply_text" rows="4" required style="width:100%;"></textarea>
+    </div>
+    <div>
+      <button type="submit" name="submit_reply">Submit Reply</button>
+    </div>
+  </form>
+
+  <hr>
+  {% if ticket.status != TICKET_STATUSES.RESOLVED and ticket.status != TICKET_STATUSES.CLOSED %}
+  <form method="post" action="{{ url_for('ticket_detail', ticket_id=ticket.ticket_id) }}" style="margin-top: 20px;">
+    <button type="submit" name="resolve_ticket">Mark as Resolved</button>
+  </form>
+  {% elif ticket.status == TICKET_STATUSES.RESOLVED %}
+  <p><em>This ticket is currently marked as Resolved.</em></p>
+  <p style="margin-top: 10px;"><a href="{{ url_for('invoice_placeholder', ticket_id=ticket.ticket_id) }}">View Invoice (Placeholder)</a></p>
+  {# Optionally, add a button to "Re-open" or "Close" if desired in future #}
+  {% endif %}
+
+{% endblock %}

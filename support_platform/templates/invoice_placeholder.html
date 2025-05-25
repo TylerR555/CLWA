@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Invoice for Ticket #{{ ticket.ticket_id }}{% endblock %}
+
+{% block content %}
+  <h2>Invoice (Placeholder)</h2>
+  <p>This is a placeholder for the invoice related to Ticket #{{ ticket.ticket_id }}.</p>
+  <p><strong>Ticket Issue Type:</strong> {{ ticket.issue_type }}</p>
+  <p><strong>Ticket Status:</strong> {{ ticket.status }}</p>
+  <p><strong>Created Date:</strong> {{ ticket.created_at.strftime('%Y-%m-%d %H:%M UTC') }}</p>
+  
+  <hr>
+  <p><em>Full invoice details and generation will be implemented here in a future update.</em></p>
+
+  <p><a href="{{ url_for('ticket_detail', ticket_id=ticket.ticket_id) }}">Back to Ticket Details</a></p>
+{% endblock %}

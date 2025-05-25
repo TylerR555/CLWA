@@ -1,0 +1,147 @@
+/* Basic Reset & Body */
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* Navigation */
+nav {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;
+}
+nav a:hover {
+    background: #555;
+}
+
+/* Content Area */
+.content {
+    padding: 20px;
+    background: #fff;
+    margin: 20px auto; /* Centering content for larger screens */
+    width: 80%; /* Consistent with .container but applied directly */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3, h4 {
+    color: #333;
+}
+
+/* Forms */
+form div {
+    margin-bottom: 15px;
+}
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+form input[type="text"],
+form input[type="password"],
+form input[type="file"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* So padding doesn't add to width */
+}
+form button[type="submit"] {
+    background: #337ab7; /* A common blue color */
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+form button[type="submit"]:hover {
+    background: #286090;
+}
+
+/* Alerts / Flash Messages */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Ticket List */
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Ticket Detail */
+.reply {
+    border: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 3px;
+}
+.reply p:first-child { /* Reply metadata */
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 5px;
+}
+pre {
+    background-color: #eee;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: block;
+    white-space: pre-wrap; /* wrap long lines */
+    word-wrap: break-word; /* break words if necessary */
+    font-family: monospace;
+}
+
+/* Screenshots */
+.screenshots img {
+    max-width: 150px; /* Smaller thumbnails in detail view */
+    max-height: 150px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    padding: 2px;
+}
