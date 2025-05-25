@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Ticket{% endblock %}
+
+{% block content %}
+  <h2>Create New Ticket</h2>
+  <form method="post" enctype="multipart/form-data"> {# Add enctype for file uploads #}
+    <div>
+      <label for="issue_type">Issue Type:</label>
+      <select id="issue_type" name="issue_type" required>
+        {% for issue in issue_types %}
+          <option value="{{ issue }}">{{ issue }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    <div>
+      <label for="screenshots">Screenshots (Optional):</label>
+      <input type="file" id="screenshots" name="screenshots" multiple>
+    </div>
+    <div>
+      <button type="submit">Create Ticket</button>
+    </div>
+  </form>
+{% endblock %}

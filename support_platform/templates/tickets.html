@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}My Tickets{% endblock %}
+
+{% block content %}
+  <h2>My Tickets</h2>
+  {% if tickets %}
+    <ul>
+      {% for ticket in tickets %}
+        <li>
+          <a href="{{ url_for('ticket_detail', ticket_id=ticket.ticket_id) }}">
+            Ticket #{{ ticket.ticket_id }} - {{ ticket.issue_type }}
+          </a>
+          <br>
+          Status: {{ ticket.status }} | Created: {{ ticket.created_at.strftime('%Y-%m-%d %H:%M') }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have not created any tickets yet. <a href="{{ url_for('create_ticket') }}">Create one now!</a></p>
+  {% endif %}
+{% endblock %}
